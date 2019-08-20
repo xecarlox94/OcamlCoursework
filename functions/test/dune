@@ -1,0 +1,3 @@
+(test
+  (name FunctionsTests)
+  (libraries Functions oUnit qcheck))

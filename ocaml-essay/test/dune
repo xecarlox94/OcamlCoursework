@@ -1,0 +1,3 @@
+(test
+  (name EssayTests)
+  (libraries Essay oUnit qcheck))

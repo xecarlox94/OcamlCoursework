@@ -1,0 +1,3 @@
+(test
+  (name SortingTests)
+  (libraries Sorting oUnit qcheck))

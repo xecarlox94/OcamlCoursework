@@ -1,0 +1,3 @@
+(test
+  (name MatricesTests)
+  (libraries Matrices oUnit qcheck))

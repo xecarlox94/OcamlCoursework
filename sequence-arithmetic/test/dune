@@ -1,0 +1,3 @@
+(test
+  (name SequenceArithmeticTests)
+  (libraries SequenceArithmetic oUnit qcheck))

@@ -1,0 +1,3 @@
+(test
+  (name ChurchNumeralsTests)
+  (libraries ChurchNumerals oUnit qcheck))
