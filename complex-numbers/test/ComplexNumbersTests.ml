@@ -85,7 +85,7 @@ let mult_commutative =
               ~print:show_complex_numbers2
               (Gen.pair complex_number_gen complex_number_gen))
     (* TODO *)
-    (fun (ci1,ci2) -> false);;
+    (fun (ci1,ci2) -> cmult ci1 ci2 = cmult ci2 ci1 );;
 
 (* add is associative:
  * z1 + (z2 + z3) = (z1 + z2) + z3  *)
@@ -105,7 +105,8 @@ let mult_associative =
               ~print:show_complex_numbers3
               (Gen.triple complex_number_gen complex_number_gen complex_number_gen))
     (* TODO *)
-    (fun (ci1,ci2,ci3) -> false);;
+    (fun (ci1,ci2,ci3) -> 
+      (cmult ci1 (cmult ci2 ci3)) = (cmult ci3 (cmult ci1 ci2)) );;
 
 (* Multiplication is distributive with respect to addition:
  * z1 * (z2 + z3) = z1 * z2 + z1 * z3 *)
@@ -117,7 +118,7 @@ let mult_distributive =
                  complex_number_gen
                  complex_number_gen))
     (* TODO *)
-    (fun (ci1,ci2,ci3) -> false);;
+    (fun (ci1,ci2,ci3) -> cmult ci1 (cadd ci2 ci3) = cadd (cmult ci1 ci2) (cmult ci1 ci3) );;
 
 (* numeric property tests *)
 
@@ -144,7 +145,7 @@ let add_identity =
               ~print:show_complex_numbers1
               (complex_number_gen))
     (* TODO *)
-    (fun ci1 -> false) ;;
+    (fun ci1 -> cadd ci1 (CI(0,0)) = cadd ci1 (CI(0,0)) ) ;;
 
 (* list of all property tests *)                  
 let property_tests =
