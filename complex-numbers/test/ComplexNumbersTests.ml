@@ -20,17 +20,17 @@ let cmult_test1 _test_ctxt =
 (* write another unit test for cmult *)
 let cmult_test2 _test_ctxt =
   (* TODO *)
-  assert_equal (CI(0,30)) (cmult (CI(5,5) CI(3,3))) ;;
+  assert_equal (CI(0,30)) (cmult (CI(5,5)) (CI(3,3))) ;;
 
 (* write another unit test for cmult *)
 let cmult_test3 _test_ctxt =
   (* TODO *)
-  assert_equal (CI(2,54)) (cmult (CI(6,2) CI(3,8))) ;;
+  assert_equal (CI(2,54)) (cmult (CI(6,2)) (CI(3,8))) ;;
 
 (* write another unit test for cmult *)
 let cmult_test4 _test_ctxt =
   (* TODO *)
-  assert_equal (CI(-7,63)) (cmult (CI(9,1) CI(0,7))) ;;
+  assert_equal (CI(-7,63)) (cmult (CI(9,1)) (CI(0,7))) ;;
 
 (* list of unit tests *)
 let unit_tests =
