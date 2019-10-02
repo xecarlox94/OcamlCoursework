@@ -14,32 +14,32 @@ let seqadd_test2 _test_ctxt =
 (* another test of seqadd on two non-empty lists *)
 let seqadd_test3 _test_ctxt =
   (* TODO *)
-  assert_failure "not implemented yet" ;;
+  assert_equal [6;10;15] (seqadd [3;5;10] [3;5;5]) ;;
 
 (* another test of seqadd on two non-empty lists *)
 let seqadd_test4 _test_ctxt =
   (* TODO *)
-  assert_failure "not implemented yet" ;;
+  assert_equal [8;9;10] (seqadd [1;8;5] [7;1;5]) ;;
 
 (* test of seqmult on two empty lists *)
 let seqmult_test1 _test_ctxt =
   (* TODO *)
-  assert_failure "not implemented yet" ;;
+  assert_equal [8;12;24] (seqmult [4;2;12] [2;6;2]) ;;
 
 (* test seqmult on two non-empty lists *)
 let seqmult_test2 _test_ctxt =
   (* TODO *)
-  assert_failure "not implemented yet" ;;
+  assert_equal [9;6;12] (seqmult [3;2;4] [3;3;3]) ;;
 
 (* test seqmult on two non-empty lists *)
 let seqmult_test3 _test_ctxt =
   (* TODO *)
-  assert_failure "not implemented yet" ;;
+  assert_equal [16;18;12] (seqmult [4;2;6] [4;9;2]) ;;
 
 (* test seqmult on two non-empty lists *)
 let seqmult_test4 _test_ctxt =
   (* TODO *)
-  assert_failure "not implemented yet" ;;
+  assert_equal [2;3;6] (seqmult [1;3;3] [2;1;2]) ;;
 
 (* list of unit tests *)
 let unit_tests =
