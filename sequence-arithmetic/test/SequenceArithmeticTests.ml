@@ -122,7 +122,7 @@ let seqmult_zeros =
               ~print:show_sequence
               (Gen.pair integer_sequence_gen zeros_gen))
     (* TODO *)
-    (fun (seq,zeros) -> false);;
+    (fun (seq,zeros) -> seqmult seq zeros = zeros );;
 
 (* list of all property tests *)                  
 let property_tests =
