@@ -247,7 +247,8 @@ let associative_multiplication =
               ~print:string_of_matrices3
               (Gen.triple matrix_gen matrix_gen matrix_gen))
     (* TODO *)
-    (fun (m1,m2,m3) -> false);;
+    (fun (m1,m2,m3) ->
+      matrixmult m1 (matrixmult m2 m3) = matrixmult (matrixmult m1 m2) m3 );;
 
 (* A( B + C ) = AB + AC
    (Distributive law of matrix algebra)
@@ -258,7 +259,8 @@ let distributive_multiplication =
               ~print:string_of_matrices3
               (Gen.triple matrix_gen matrix_gen matrix_gen))
     (* TODO *)
-    (fun (m1,m2,m3) -> false);;
+    (fun (m1,m2,m3) ->
+      matrixmult m1 (matrixadd m2 m3) = matrixadd (matrixmult m1 m2) (matrixmult m1 m3) );;
 
 (* numeric property tests *)
 
@@ -286,7 +288,7 @@ let multiplcation_zeros =
                  matrix_zeros_gen (* m2 *)
   ))
     (* TODO *)
-    (fun (m1,m2) -> false) ;;
+    (fun (m1,m2) -> matrixmult m1 m2 = m2 ) ;;
 
 
 (* list of all property tests *)                  
