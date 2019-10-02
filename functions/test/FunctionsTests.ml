@@ -27,7 +27,7 @@ let curry_prop =
 (* forall f, x, y. f x y == (curry (uncurry f)) x y *)
 let curry_uncurry_prop =
   let f = fun x y -> x + y in
-  QCheck.Test.make ~name:"curry_prop" ~count:10000
+  QCheck.Test.make ~name:"curry_uncurry_prop" ~count:10000
     QCheck.(make
               (Gen.pair
                  Gen.nat (* i1 *)
