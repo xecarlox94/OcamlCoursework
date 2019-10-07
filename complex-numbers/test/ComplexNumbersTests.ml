@@ -145,7 +145,7 @@ let add_identity =
               ~print:show_complex_numbers1
               (complex_number_gen))
     (* TODO *)
-    (fun ci1 -> cadd ci1 (CI(0,0)) = cadd ci1 (CI(0,0)) ) ;;
+    (fun ci1 -> cadd ci1 (CI(0,0)) = cadd (CI(0,0)) ci1 ) ;;
 
 (* list of all property tests *)                  
 let property_tests =

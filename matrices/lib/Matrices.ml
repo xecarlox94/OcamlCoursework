@@ -22,10 +22,48 @@ let rec string_of_matrix m =
 (* function getbody to retrieve the body of the intmatrix which is of type intseq list *)
 let getbody (IM x) = x;;
 
+(* Gets head of a list *)
+let get_head (xlist: int list): int =
+  match xlist with
+    (x::rest) -> x ;;  
+    
+
+(* counts elements in a list *)
+let rec count_row_elements (row: 'a list): int =
+  match row with
+    [] -> 0
+    | (x::rest) -> 1 + count_row_elements rest ;;
+
+(* returns an list with the length of each row list *)
+let rec rows_length_list (x: intmatrix): int list =
+  match x with
+    IM [] -> []
+    | IM [[]] -> []
+    | IM (row::rest) -> (count_row_elements row) :: rows_length_list (IM rest) ;;
+
+
+(* checks if all list elements are equal to l and equal among eachother *)
+let rec all_list_elem_same l (xs: int list) : bool =
+  match xs with
+    [] -> true
+    | [elem] -> (elem = l)
+    | (x::rest) -> (x = l) && all_list_elem_same l rest ;;
+    
+
+(* checks if matrix rows have all the same length *)
+let all_matrix_rows_same (x: intmatrix) =
+  all_list_elem_same (get_head (rows_length_list x)) (rows_length_list x) ;;
+
+
+
 (* test whether a list of lists of integers represents a matrix. 
    The length of each row should be equal.*)
 let ismatrix x =
-  failwith "not implemented yet" ;;
+  match x with
+    (IM []) -> true
+    | (IM [[]]) -> true
+    | x -> all_matrix_rows_same x
+    | _ -> false ;;
 
 (* function matrixshape takes the matrix, and calculates the number of
    columns and rows *)
