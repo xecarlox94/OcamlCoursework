@@ -132,5 +132,5 @@ let rec mult_mat x y: intmatrix =
     | IM (rowx::restx), IM (rowy::resty) -> (mul_two_intseq rowx rowy) :: mult_mat restx resty ;;
 
 (* matrix multiplication *)
-let matrixmult x y = (get_matrix_transposed x) y ;;
+let matrixmult x y = mult_mat (get_matrix_transposed x) y ;;
 
