@@ -1,13 +1,13 @@
 (* Write an essay on the ML type system.  Be clear, to-the-point, and concise.  Convince your 
  * marker that you understand:
  *                                                                                
- * - Ad-hoc and parametric polymorphism.
- * - Function types.
- * - List types and tuple types (and their differences).
- * - Equality types.
- * - ML patterns and pattern-matching.
- * - Unit testing (test/EssayTests.ml).
- * - Property based testing (test/EssayTests.ml).
+ * - Function type signatures.  
+ * - Polymorphism. 
+ * - List types and tuple types (and their differences). 
+ * - OCaml pattern-matching on values (e.g. integers) and structures (e.g. lists). 
+ * - Named and anonymous functions. 
+ * - Recursive functions. 
+ * - Unit and property based tests. 
  * 
  * Include short code-fragments (as I do when lecturing) to illustrate
  * your observations.
