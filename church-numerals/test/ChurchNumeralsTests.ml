@@ -8,7 +8,7 @@ let c2i_0 _cxt =
 (* test the output from: (c2i (i2c 5)) *)
 let c2i_1 _cxt =
   (* TODO *)
- assert_failure "not implemented yet" ;;
+  assert_equal (c2i (i2c 5)) 5 ;;
 
 (* list of unit tests *)
 let unit_tests =
@@ -24,7 +24,7 @@ let c2i_i2c_identity =
   QCheck.Test.make ~name:"mult_distributive" ~count:10000
     QCheck.(make Gen.nat)
     (* TODO *)
-    (fun x -> false );;
+    (fun x -> c2i (i2c x) = x );;
 
 (* list of all property tests *)                  
 let property_tests =
