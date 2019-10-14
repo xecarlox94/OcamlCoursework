@@ -24,8 +24,11 @@ let add (x:int) (y:int) : int = x + y ;;
 
 
 
+
+
+
 (*
-    The Ocaml language is a statically typed functional language that can infer the types of variables or functions on the go but it is a good practice to explicitly declare them. The Function type signatures define the function's arguments and return types. This is a good feature as it helps programmers to easily identify the behavior and the properties of a function just from the type signatures. There are two ways to declare type signatures.
+    The Ocaml language is a statically typed functional language that can infer the types of variables or functions on the go but it is a good practice to explicitly declare them. The Function type signatures define the function's arguments and return types. This is a good feature as it helps programmers to easily identify the behaviour and the properties of a function just from the type signatures. There are two ways to declare type signatures.
     The first is to declare it between the function declaration (using a collumn) and body (using the equal sign), where arguments and the return types are separated by right arrows. The function arguments are later bound to the function inside the function’s body, using the fun keyword and a right arrow before the function's implementation. 
     
     The following function is an example of that, it is called mul_int and its arguments are two integers that will be multiplied it will return an integer. The arguments are bound inside the function's body using the fun keyword and the right arrow, before the implementation.
@@ -63,3 +66,23 @@ let rec count: 'a list -> int =
 count [23;5;7;8] ;;
 
 count ["dsf";"sdfs"; "sddfsf"] ;;
+
+
+(*
+    In Ocaml, lists are polymorphic sequences and for that reason can hold any kind of type. Although lists are polymorphic, once the first element is inserted, all elements must be of the same type. Lists can be decomposed and constructor using the “cons” operator, to separate the head element of a list from the rest of the list or to join an element to a list and it be decomposed further until it reaches its initial nuclear value, an empty list “[ ]”. The application of const on lists is very important in OCaml programming as it allows to manipulate large volumes of data using specific functions, due to its iterative nature. The lists are declared using squared brackets and its values are separated by semicolumns.
+    The tuple type also features in the language, and its purpose is to aggregate data values into one variable. The tuple is also a polymorphic data type and it even allows to aggregate different data types in the same variable, as long as the data types are uniform to its type signature declared upon its creation. The tuples can be constructed using the brackets and its values must be separated using commas. The tuples are not interactive as lists so they can not be used to store sequences.
+
+
+
+    An example of two lists can be as it follows:
+*)
+
+let s_list = ( "dshsg" :: ( "asafasf" :: [] ) ) ;;
+
+let s_float = ( 3.7 :: ( 2.6 ::  ( 3.1 :: [] ) ) ) ;;
+
+(* Two example of tuples are the following *)
+
+let tuple = (23, "dfaf", true) ;;
+
+let tuple2 = ("sdfsa", "adsfdsf", "jtyjtyjtj") ;;
