@@ -1,8 +1,8 @@
 
 (* implement the function *)
 let curry : (('a * 'b) -> 'c) -> 'a -> 'b -> 'c =
-  failwith "not implemented yet" ;;
+  fun f x y -> f (x , y) ;;
 
 (* implement the function *)
 let uncurry : ('a -> 'b -> 'c) -> ('a * 'b) -> 'c =
-  failwith "not implemented yet" ;;
+  fun f (x, y) -> f x y ;;

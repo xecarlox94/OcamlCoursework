@@ -69,38 +69,22 @@ let rec sum_two_intseq: intseq -> intseq -> intseq =
       | (h1::rest1), (h2::rest2) -> (h1 + h2) :: sum_two_intseq rest1 rest2
       | _ -> [] ;;
 
-(* multiplies two intseq, element by element *)
-let rec mul_two_intseq: intseq -> intseq -> int =
-  fun xs ys ->
-    match xs, ys with
-      [x], [y] -> ( x * y )
-      | (h1::rest1), (h2::rest2) -> (h1 * h2) + (mul_two_intseq rest1 rest2)
-      | _ -> 0 ;;
 
-(* takes an integer from an intseq *)
+(* takes an integer from an intseq
 let rec take_elem_pos (elem: int ) (list: intseq) =
   match list with 
     (x::rest) -> 
       if (elem = 0)
       then x
       else take_elem_pos (elem - 1) rest
-    | _ -> -1 ;;
+    | _ -> -1 ;; *)
 
-(* builds an intseq from many different lists, from a specific index *)
+(* builds an intseq from many different lists, from a specific index
 let rec build_new_row (elem: int) (list: intseq list) : intseq =
   match list with
     [] -> []
-    | (head::rest) -> (take_elem_pos elem head) :: build_new_row elem rest;;
+    | (head::rest) -> (take_elem_pos elem head) :: build_new_row elem rest;; *)
 
-
-(* it transposes a matrix, for matrices' multiplication *)
-let rec transpose_matrix (counter: int ) x : intmatrix = 
-  match x with
-    (IM [row]) -> build_new_row counter row 
-    | IM (row::rest) -> (build_new_row counter row) :: getbody (transpose_matrix (counter + 1) rest) ;;
-
-(* calculates the matrix collumn length and returns transposed matrix *)
-let get_matrix_transposed (x: intmatrix): intmatrix = transpose_matrix 0 x ;;
 
 (* test whether a list of lists of integers represents a matrix. 
    The length of each row should be equal.*)
@@ -121,16 +105,12 @@ let matrixshape x =
 let rec matrixadd x y =
   match x, y with
     (IM [row1]), (IM [row2]) -> (sum_two_intseq row1 row2)
-    | (IM (rowx::restx)), (IM (rowy::resty)) ->
+    | (rowx::restx), (rowy::resty) ->
       (sum_two_intseq rowx rowy) :: ( getbody (matrixadd ( IM restx) (IM resty)) ) ;;
 
-(* it recursively multiplies two matrices, without reversing the first one *)
-let rec mult_mat x y: intmatrix =
-  match x, y with
-    IM (rowx::restx), IM [rowy] -> (mul_two_intseq rowx rowy)
-    | IM [rowx], IM (rowy::resty) -> (mul_two_intseq rowx rowy)
-    | IM (rowx::restx), IM (rowy::resty) -> (mul_two_intseq rowx rowy) :: mult_mat restx resty ;;
 
 (* matrix multiplication *)
-let matrixmult x y = mult_mat (get_matrix_transposed x) y ;;
+let matrixmult x y = 
+  failwith "not implemented yet" ;;
+
 
