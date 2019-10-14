@@ -86,3 +86,62 @@ let s_float = ( 3.7 :: ( 2.6 ::  ( 3.1 :: [] ) ) ) ;;
 let tuple = (23, "dfaf", true) ;;
 
 let tuple2 = ("sdfsa", "adsfdsf", "jtyjtyjtj") ;;
+
+
+
+(*
+    Match pattern is a feature that checks if the argument or multiple arguments against values, conditions or deconstructors. When the arguments are evaluated in a certain match pattern its expression runs, otherwise the arguments can be evaluated using the wildcard “_” that will run the default expression. Match Pattern is very useful for lists as it provides the functionality to perform list operations, along with the “cons” operator aid. This feature also allows tuples or any data type to be deconstructed, to extract data or other aggregated data types.
+
+    The followig match pattern is testing the string value weather and if it does not match, the will card will "catch" any other value.
+*)
+
+
+let is_good_weather: string -> bool = 
+    fun weather ->
+        match weather with
+            "sunny" -> true
+            | "raining" -> false
+            | _ -> false ;;
+
+is_good_weather "sunny" ;;
+is_good_weather "windy" ;;
+
+
+(*
+    These two function deconstructs a list. The first returns its head element and the second returns the rest of a list ( the whole list without the head element ). it uses the wild card combinated with the list to ignore the parts non-relevant for the purpose of this function
+*)
+
+let int_list = [7;1;2;3;4;5;9] ;;
+
+let get_head: int list -> int = 
+    fun list ->
+    match list with
+        (head::_) -> head
+        | _ -> -1 ;;
+
+get_head int_list;;
+
+
+let get_rest: int list -> int list = 
+    fun list ->
+    match list with
+        (_::rest) -> rest
+        | _ -> [] ;;
+
+get_rest int_list ;;
+
+(*
+    The following function deconstructs a tuple and returns its integer
+*)
+
+let tuple1: ( string * int) = ("Hi there", 123) ;;
+
+let get_tuples_integer: (string * int) -> int =
+    fun tuple ->
+        match tuple with
+            (str, int) -> int ;;
+
+get_tuples_integer tuple1 ;;
+
+
+
