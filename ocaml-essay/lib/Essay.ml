@@ -143,4 +143,29 @@ let get_tuples_integer: (string * int) -> int =
 get_tuples_integer tuple1 ;;
 
 
+(*
+    Named and Anonymous functions have different purposes. Essentially when a function is named it is stored in a variable and it can be called and applied throughout the program. Another technique which is part of the named function is the partial application, that consists of storing an existing function, with more than one argument, and creating a new function composed of the old function applying a specific argument.
+    Otherwise, the function might not need to be named or stored, mostly when it is used in one specific case or if it used inside another regular function or even a high-order function. An anonymous function is defined as a lambda expression, using the “fun” keyword to bind the variables from outside the function.
 
+    The next functions is a normal named functions. The second one is also a named function but resultant from a partially applied named function.
+*)
+
+let mul_int: int -> int -> int = fun x y -> x * y ;;
+
+mul_int 5 6 ;;
+
+let mul_int_by_100 = mul_int 100 ;;
+
+mul_int_by_100 56;;
+
+(*
+    The following function is a map higher function which will apply a anonymous function to every element of the array.
+*)
+
+let rec map: int list -> ( 'a -> 'b ) -> int list = 
+    fun list f ->
+    match list with
+        [] -> []
+        | (head::rest) -> (f head) :: (map rest f) ;;
+
+map int_list (fun x -> x * 5) ;;
