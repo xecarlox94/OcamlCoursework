@@ -11,7 +11,9 @@ let curry_test1 _test_ctxt =
 
 (* TODO write a unit test to test the uncurry function *)
 let uncurry_test1 _test_ctxt =
-  assert_failure "not implemented yet" ;;
+  assert_equal 
+    (uncurry (+) (4,4))
+      8 ;;
 
 (* forall f, x, y. f x y == uncurry f (x,y) *)
 let curry_prop =
@@ -34,7 +36,7 @@ let curry_uncurry_prop =
                  Gen.nat (* i2 *)
   ))
     (* TODO *)
-    (fun (i1,i2) -> false) ;;
+    (fun (i1,i2) -> f i1 i2  = (curry (uncurry f)) i1 i2 ) ;;
 
 (* list of unit tests *)
 let unit_tests =
