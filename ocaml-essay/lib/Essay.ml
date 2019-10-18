@@ -162,7 +162,7 @@ mul_int_by_100 56;;
     The following function is a map higher function which will apply a anonymous function to every element of the array.
 *)
 
-let rec map: int list -> ( 'a -> 'b ) -> int list = 
+let rec map:  'a list -> ( 'a -> 'b ) -> 'b list = 
     fun list f ->
     match list with
         [] -> []
