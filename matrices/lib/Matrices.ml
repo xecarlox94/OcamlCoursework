@@ -70,22 +70,6 @@ let rec sum_two_intseq: intseq -> intseq -> intseq =
       | _ -> [] ;;
 
 
-(* takes an integer from an intseq
-let rec take_elem_pos (elem: int ) (list: intseq) =
-  match list with 
-    (x::rest) -> 
-      if (elem = 0)
-      then x
-      else take_elem_pos (elem - 1) rest
-    | _ -> -1 ;; *)
-
-(* builds an intseq from many different lists, from a specific index
-let rec build_new_row (elem: int) (list: intseq list) : intseq =
-  match list with
-    [] -> []
-    | (head::rest) -> (take_elem_pos elem head) :: build_new_row elem rest;; *)
-
-
 (* test whether a list of lists of integers represents a matrix. 
    The length of each row should be equal.*)
 let ismatrix x =
@@ -103,10 +87,7 @@ let matrixshape x =
 
 (* matrix addition *)
 let rec matrixadd x y =
-  match x, y with
-    (IM [row1]), (IM [row2]) -> (sum_two_intseq row1 row2)
-    | (rowx::restx), (rowy::resty) ->
-      (sum_two_intseq rowx rowy) :: ( getbody (matrixadd ( IM restx) (IM resty)) ) ;;
+  failwith "not implemented yet" ;;
 
 
 (* matrix multiplication *)
