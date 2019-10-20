@@ -24,13 +24,12 @@ let add (x:int) (y:int) : int = x + y ;;
 
 
 
-
-
-
 (*
+    ** Function type signatures **
+
     The Ocaml language is a statically typed functional language that can infer the types of variables or functions on the go but it is a good practice to explicitly declare them in the constraint section. The Function type signatures constraints the function's arguments and return types. This is a good feature as it helps programmers to easily identify the behaviour and the properties of a function just from the type signatures. There are two ways to declare type signatures.
     The first is to declare the signature inside the function’s constraint. The function arguments are later bound to the function inside the function’s body.
-    The second way to do a function signature is to bind the arguments to the function variable and declare the arguments’ types inline inside its brackets separated by a column. The arguments remain int the function’s constraint section. The return type is then declared separated by a column, before the function’s body.
+    The second way to do a function signature is to bind the arguments to the function variable and declare the arguments’ types inline inside its brackets separated by a column. The arguments remain int the function’s constraint section. The return type is then declared separated by a column, but still inside the function's constraints.
     
     The following function is an example of that, it is called mul_int and its arguments are two integers that will be multiplied it will return an integer. The arguments are bound inside the function's body using the fun keyword and the right arrow, before the implementation.
 *)
@@ -51,7 +50,9 @@ let div_float (x: float) (y: float) : float = x /. y ;;
 div_float 4.0 2.0 ;;
 
 (*
-    Although the function is statically typed it provides flexibility and reusability in the code as it supports polymorphism. This feature allows the programmers to generalise the arguments and return types. The advantage is to reuse the function for many different scenarios that match the same signature type pattern, without writing more code. The polymorphic type is defined using one single quotation mark before a generic character such as “a”, “b” or “c”. Any implementation of a polymorphic function must follow the generic types defined by using the same types either on the arguments or as the function result.
+    ** Polymorphism **
+
+    Although the function is statically typed it provides flexibility and reusability in the code as it supports polymorphism. This feature allows the programmers to generalise the arguments and return types. The advantage is to reuse the function for many different scenarios that match the same signature type pattern, without writing more code. The polymorphic type is defined using one single quotation mark before a generic character such as “a”, “b” or “c”. Any implementation of a polymorphic function must follow the generic types defined by using the same types either on the arguments or as the function return result.
     The biggest advantage of this is when defining high order functions that apply the same functionality to different cases. The higher may or may not apply other functions specified in the arguments for certain scenarios.
 
     The high order count is an example of an high order function that count the number of elements on a list. This function is polymorphic because it can handle any kind of list, either integer or string list for example.
@@ -70,8 +71,10 @@ count ["dsf";"sdfs"; "sddfsf"] ;;
 
 
 (*
+    ** List types and tuple types **
+
     In Ocaml, lists are polymorphic sequences and for that reason can hold any kind of type. Although lists are polymorphic, once the first element is inserted, all elements must be of the same type. Lists can be decomposed and constructor using the “cons” operator, to separate the head element of a list from the rest of the list or to join an element to a list and it is decomposed further until it reaches its initial nuclear value, an empty list “[ ]”. The application of const on lists is very important in OCaml programming as it allows to manipulate large volumes of data using specific functions, due to its iterative nature. The lists are declared using squared brackets and its values are separated by semicolumns.
-    The tuple type also features in the language, and its purpose is to aggregate data values into one variable. The tuple is also a polymorphic data type and it even allows to aggregate different data types in the same variable, as long as the data types are uniform to its type signature declared upon its creation. The tuples can be constructed using the brackets and its values must be separated using commas. The tuples are not interactive as lists so they can not be used to store sequences.
+    The tuple type also features in the language, and its purpose is to aggregate data values into one variable. The tuple is also a polymorphic data type and it even allows to aggregate different data types in the same variable, as long as the data types are uniform to its type signature declared upon its creation. The tuples can be constructed using the brackets and its values must be separated using commas. The tuples are not interative as lists so they can not be used to store sequences.
 
     An example of two lists can be as it follows:
 *)
@@ -89,6 +92,8 @@ let tuple2 = ("sdfsa", "adsfdsf", "jtyjtyjtj") ;;
 
 
 (*
+    ** OCaml pattern-matching on values and structures **
+
     Match pattern is a feature that checks if the argument or multiple arguments against values, conditions or deconstructors. When the arguments are evaluated in a certain match pattern its expression runs, otherwise the arguments can be evaluated using the wildcard “_” that will run the default expression. Match Pattern is very useful for lists as it provides the functionality to perform list operations, along with the “cons” operator aid. This feature also allows tuples or any data type to be deconstructed, to extract data or other aggregated data types.
 
     The followig match pattern is testing the string value weather and if it does not match, the will card will "catch" any other value.
@@ -144,6 +149,8 @@ get_tuples_integer tuple1 ;;
 
 
 (*
+    ** Named and anonymous functions **
+
     Named and Anonymous functions have different purposes. Essentially when a function is named it is stored in a variable and it can be called and applied throughout the program. Another technique which is part of the named function is the partial application, that consists of storing an existing function, with more than one argument, and creating a new function composed of the old function applying a specific argument.
     Otherwise, the function might not need to be named or stored, mostly when it is used in one specific case or if it used inside another regular function or even a high-order function. An anonymous function is defined as a lambda expression, using the “fun” keyword to bind the variables from outside the function.
 
