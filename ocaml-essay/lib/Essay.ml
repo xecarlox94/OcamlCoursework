@@ -198,4 +198,9 @@ let rec filter: 'a list -> ( 'a -> bool ) -> 'a list =
             | (head::restx) when (f head) = true -> head :: (filter restx f)
             | (head::restx) -> filter restx f ;;
 
+
+(* this filter funciton will return a integer sequence list, containing even integers only, as a result of using a anonymous function that asserts each integer *)
+
 let only_evens = filter int_list (fun x -> (x mod 2) = 0) ;;
+
+
