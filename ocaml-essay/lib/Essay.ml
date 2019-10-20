@@ -204,3 +204,11 @@ let rec filter: 'a list -> ( 'a -> bool ) -> 'a list =
 let only_evens = filter int_list (fun x -> (x mod 2) = 0) ;;
 
 
+(*
+    ** Unit and property based tests **
+
+    Ocaml has support for unit based testing. This kind of testing test each function with a specific case. Each case is specific with unique values and its range is very limited, since it is very time consuming or imposible to test all possible cases, manually unit testing every single case.
+    As a result of Ocaml being a functional programming, it has support for property based testing. Property testing has an incomparable more extensive and wider range than unit testing since the values being tested are randomly assigned by a library as well as the amount of test cases. Additionally to the variable automation, the property based testing library uses bound values to reduce the time to report major programming bugs or logical innacuracies. 
+    Property based testing is only possible in functionally programming, due to the strict use of immutable variables and lambda computation as well as the absence of blobal state variables or structures. Immutable variables assure the programmer that the the memory address values will not change in any circunstance and, as a result, the result of any function is not affected by any paralel computation since there is none. The functional programming languages being lambda computation based, ensures that the order of processing does not matter as, according with the church-russel theorem, it will always return the exact same result, in any order of computation. Additionally lambda calculus also determines that functional programming is composed solely by functions, and any functions has the only purpose of taking input and returning input. For this last reason, there is no global state variables or structures being manipulated hence the predictness and absence of second effects on resuts necessary for property based testing.
+
+*)
