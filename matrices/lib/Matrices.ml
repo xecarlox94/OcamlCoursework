@@ -61,14 +61,6 @@ let rec all_list_elem_same l (xs: int list) : bool =
 let all_matrix_rows_same (x: intmatrix) =
   all_list_elem_same (get_head (rows_length_list x)) (rows_length_list x) ;;
 
-(* sums two intseq, element by element, and returns a intseq  *)
-let rec sum_two_intseq: intseq -> intseq -> intseq =
-  fun xs ys ->
-    match xs, ys with
-      [x], [y] -> [( x + y )]
-      | (h1::rest1), (h2::rest2) -> (h1 + h2) :: sum_two_intseq rest1 rest2
-      | _ -> [] ;;
-
 
 (* test whether a list of lists of integers represents a matrix. 
    The length of each row should be equal.*)
