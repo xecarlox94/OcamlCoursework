@@ -176,3 +176,26 @@ let rec map:  'a list -> ( 'a -> 'b ) -> 'b list =
         | (head::rest) -> (f head) :: (map rest f) ;;
 
 map int_list (fun x -> x * 5) ;;
+
+
+(*
+    ** Recursive functions **
+
+    Recursiveness is essential for functional programming since it is not possible to perform loops or most control flow tecniques, since functional programming is part of the declarative paradigm of programming. The declarative paradigm expresses the computations needed to run but it does not describe the control flow of the program. 
+    Recursion is then an crucial tecnique, for functional and declarative programming languages, as it performs repetitive tasks specified by computational expressions until a certain base case stops the repetition its own repetition, avoiding a potential infinite loop. In Recursion, every case possible must be expressed, in order to avoid unexpected infinite computation, and the base case should be the first in the case order. The reason behind the recursion order so the function checks if it is final result has been reached before any other case avoiding, as well, infinite computation.
+    In Ocaml programming language, recursion is mostly applied in lists and it is the fundamental tecnique to manipulate them. It is possible to express a simple "if else" control flow statements inside the function's body, although it is good pratice, in functional programming, to use pattern matching since it checks exaustively for any possible pattern case on values or structures. An Ocaml recursive function needs to be declared with an additional "rec" keyword to infer the compiler or interpreter that this function will call itself muliple times, in its body.
+
+
+    The following function, the filter funtion, will recursively decompose the elements of a list and return a list that with element that match a boolean function's condition.
+
+*)
+
+
+let rec filter: 'a list -> ( 'a -> bool ) -> 'a list =
+     fun list f ->
+        match list with
+            [] -> []
+            | (head::restx) when (f head) = true -> head :: (filter restx f)
+            | (head::restx) -> filter restx f ;;
+
+let only_evens = filter int_list (fun x -> (x mod 2) = 0) ;;
