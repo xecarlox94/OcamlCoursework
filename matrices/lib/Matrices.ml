@@ -84,7 +84,7 @@ let matrixshape x =
     | x -> ( (get_head (rows_length_list x)) , (count_rows_matrix x) ) ;;
 
 (* matrix addition *)
-let rec matrixadd x y =
+let matrixadd x y =
   failwith "not implemented yet" ;;
 
 

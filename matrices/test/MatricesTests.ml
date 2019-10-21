@@ -7,58 +7,58 @@ let matrix_empty = IM [];;
 
 (* testing if empty matrix is a valid matrix (ismatrix) - should return true*)
 let ismatrix_empty_test1 _test_ctxt =
-  assert_bool true (ismatrix matrix_empty);;
+  assert_equal true (ismatrix matrix_empty);;
 
 (* testing the empty list - should return true*)
 let matrix_one_row_zero_columns = IM [[]];;
 
 (* testing if matrix with one empty row is a valid matrix (ismatrix) - should return true*)
 let ismatrix_empty_test2 _test_ctxt =
-  assert_bool true (ismatrix matrix_one_row_zero_columns);;
+  assert_equal true (ismatrix matrix_one_row_zero_columns);;
 
 let matrix_one_row = IM [[1]];;
 
 (* testing ismatrix - should return true, as one row is still of equal length*)
 let ismatrix_one_row _test_ctxt =
-  assert_bool true (ismatrix matrix_one_row);;
+  assert_equal true (ismatrix matrix_one_row);;
 
 let matrix_two_rows = IM [[1];[2]];;
 
 (* testing ismatrix with matrx_two_rows - should return true,
    as two rows is still of equal length *)
 let ismatrix_two_rows _test_ctxt =
-  assert_bool true (ismatrix matrix_two_rows);;
+  assert_equal true (ismatrix matrix_two_rows);;
 
 let matrix_three_rows = IM [[1];[2];[3]] ;;
 
 (* testing ismatrix with matrx_three_rows - should return true,
    as two rows is still of equal length *)
 let ismatrix_three_rows _test_ctxt =
-  assert_bool true (ismatrix matrix_three_rows);;
+  assert_equal true (ismatrix matrix_three_rows);;
 
 let matrix_three_rows_two_columns = IM [[1;2];[2;3];[3;4]];;
 
 (* testing ismatrix with matrx_three_rows *)
 let ismatrix_three_rows_two_columns _test_ctxt =
-  assert_bool true (ismatrix matrix_three_rows_two_columns);;
+  assert_equal true (ismatrix matrix_three_rows_two_columns);;
 
 let matrix_four_rows_four_columns = IM [[1;2;3;4];[2;3;4;5];[3;4;5;6];[1;2;3;4]];;
 
 (* testing ismatrix with matrx_four_rows *)
 let ismatrix_four_rows_four_columns _test_ctxt =
-  assert_bool true (ismatrix matrix_four_rows_four_columns);;
+  assert_equal true (ismatrix matrix_four_rows_four_columns);;
 
 let not_a_matrix1 = IM [[1;2];[2;3];[3;4;5;6]];;
 
 (* testing ismatrix with not_a_matrix1 *)
 let ismatrix_no1 _test_ctxt =
-  assert_bool true (not (ismatrix not_a_matrix1));;
+  assert_equal true (not (ismatrix not_a_matrix1));;
 
 let not_a_matrix2 = IM [[1;2;3];[2;3;4;5];[3;4;5;6]];;
 
 (* testing ismatrix with not_a_matrix2 *)
 let ismatrix_no2 _test_ctxt =
-  assert_bool true (not (ismatrix not_a_matrix2));;
+  assert_equal true (not (ismatrix not_a_matrix2));;
 
 let matrixshape_empty _test_ctxt =
   assert_equal (0,0) (matrixshape matrix_empty);;
