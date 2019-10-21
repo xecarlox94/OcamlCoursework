@@ -23,43 +23,49 @@ let rec string_of_matrix m =
 let getbody (IM x) = x;;
 
 (* Gets head of a integer list *)
-let get_head (xlist: int list): int =
-  match xlist with
-    (x::rest) -> x
-    | _ -> -1 ;;  
+let get_head: int list -> int =
+  fun xlist ->
+    match xlist with
+      (x::rest) -> x
+      | _ -> -1 ;;  
     
 
 (* counts elements in a list *)
-let rec count_row_elements (row: 'a list): int =
-  match row with
-    [] -> 0
-    | (x::rest) -> 1 + count_row_elements rest ;;
+let rec count_row_elements: 'a list -> int =
+  fun row ->
+    match row with
+      [] -> 0
+      | (x::rest) -> 1 + count_row_elements rest ;;
 
-let rec count_rows_matrix (x: intmatrix): int =
-      match x with
-        IM [] -> 0
-        | IM [[]] -> 0
-        | IM (row::rest) -> 1 + count_rows_matrix ( IM rest ) ;;
+let rec count_rows_matrix: intmatrix -> int =
+  fun x ->
+    match x with
+      IM [] -> 0
+      | IM [[]] -> 0
+      | IM (row::rest) -> 1 + count_rows_matrix ( IM rest ) ;;
 
 (* returns an list with the length of each row list *)
-let rec rows_length_list (x: intmatrix): int list =
-  match x with
-    IM [] -> []
-    | IM [[]] -> []
-    | IM (row::rest) -> (count_row_elements row) :: rows_length_list (IM rest) ;;
+let rec rows_length_list: intmatrix ->int list =
+  fun x ->
+    match x with
+      IM [] -> []
+      | IM [[]] -> []
+      | IM (row::rest) -> (count_row_elements row) :: rows_length_list (IM rest) ;;
 
 
 (* checks if all list elements are equal to l and equal among eachother *)
-let rec all_list_elem_same l (xs: int list) : bool =
-  match xs with
-    [] -> true
-    | [elem] -> (elem = l)
-    | (x::rest) -> (x = l) && all_list_elem_same l rest ;;
+let rec all_list_elem_same: int -> int list -> bool =
+  fun l xs ->
+    match xs with
+      [] -> true
+      | [elem] -> (elem = l)
+      | (x::rest) -> (x = l) && all_list_elem_same l rest ;;
     
 
 (* checks if matrix rows have all the same length *)
-let all_matrix_rows_same (x: intmatrix) =
-  all_list_elem_same (get_head (rows_length_list x)) (rows_length_list x) ;;
+let all_matrix_rows_same: intmatrix -> bool =
+  fun x ->
+    all_list_elem_same (get_head (rows_length_list x)) (rows_length_list x) ;;
 
 
 (* test whether a list of lists of integers represents a matrix. 
