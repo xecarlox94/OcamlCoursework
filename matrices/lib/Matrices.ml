@@ -45,7 +45,7 @@ let rec count_rows_matrix: intmatrix -> int =
       | IM (row::rest) -> 1 + count_rows_matrix ( IM rest ) ;;
 
 (* returns an list with the length of each row list *)
-let rec rows_length_list: intmatrix ->int list =
+let rec rows_length_list: intmatrix -> int list =
   fun x ->
     match x with
       IM [] -> []
@@ -83,13 +83,14 @@ let matrixshape x =
     | (IM [[]]) -> (0, 0)
     | x -> ( (get_head (rows_length_list x)) , (count_rows_matrix x) ) ;;
 
-
+(* adding two intseqs, integer by integer, and returns a intseq sum of each element *)
 let rec add_two_intseqs: intseq -> intseq -> intseq =
   fun intseq1 intseq2 ->
     match intseq1, intseq2 with
       [], [] -> []
       | (head1::rest1), (head2::rest2) -> ( head1 + head2 ) :: ( add_two_intseqs rest1 rest2 ) ;; 
 
+(* adding two intseq lists, intseq by intseq, and returns a inteseq list with a sum of each intseqs *)
 let rec add_two_intseq_lists: intseq list -> intseq list -> intseq list =
   fun int_seq_list1 int_seq_list2 -> 
     match int_seq_list1, int_seq_list2 with
@@ -103,11 +104,45 @@ let matrixadd x y =
   match x, y with
   IM [], IM [] -> IM []
   | IM [[]], IM [[]] -> IM [[]]
-  | IM integerseq1, IM integerseq2 -> IM ( add_two_intseq_lists integerseq1 integerseq2 ) ;;
+  | IM integerseqlist1, IM integerseqlist2 -> IM ( add_two_intseq_lists integerseqlist1 integerseqlist2 ) ;;
+
+(* takes an integer from an intseq *)
+let rec take_elem_pos: int -> intseq -> int =
+  fun elem intseq1 ->
+    match intseq1 with
+      (x::rest) ->
+        if ( elem = 0)
+        then x
+        else take_elem_pos ( elem - 1) rest ;;
+
+(* builds an intseq from many different lists, from a specific index *)
+let rec build_new_row: int -> intseq list -> intseq =
+  fun elem intseqs ->
+    match intseqs with
+      [] -> []
+      | (row::rest) -> ( take_elem_pos elem row ) :: build_new_row elem rest ;;
+
+(* transpose a intseq list *)
+let transpose_intseq_list: intseq list -> intseq list =
+  fun intseqs ->
+    let rec transpose: int -> intseq list -> intseq list =
+      fun counter intseqlist ->
+        match intseqlist with
+          [row] -> [build_new_row counter [row] ]
+          | (row::rest) -> ( build_new_row counter [row] ) :: ( transpose (counter + 1) rest )
+    in
+    transpose 0 intseqs ;;
 
 
-(* matrix multiplication *)
+(* multiply two intseq lists and returns a single intseq list *)
+let mul_intseqs: intseq list -> intseq list -> intseq list =
+  fun intseq1 intseq2 -> intseq1 ;;
+
+(* matrix multiplication 
 let matrixmult x y = 
-  failwith "not implemented yet" ;;
+  match x, y with
+    IM [], IM [] -> IM []
+    | IM [[]], IM [[]] -> IM [[]]
+    | IM integerseq1, IM integerseq2 -> IM ( mul_intseqs (transpose_intseq_list integerseq1) integerseq2 ) ;;*)
 
 
