@@ -83,9 +83,27 @@ let matrixshape x =
     | (IM [[]]) -> (0, 0)
     | x -> ( (get_head (rows_length_list x)) , (count_rows_matrix x) ) ;;
 
+
+let rec add_two_intseqs: intseq -> intseq -> intseq =
+  fun intseq1 intseq2 ->
+    match intseq1, intseq2 with
+      [], [] -> []
+      | (head1::rest1), (head2::rest2) -> ( head1 + head2 ) :: ( add_two_intseqs rest1 rest2 ) ;; 
+
+let rec add_two_intseq_lists: intseq list -> intseq list -> intseq list =
+  fun int_seq_list1 int_seq_list2 -> 
+    match int_seq_list1, int_seq_list2 with
+      [], [] -> []
+      | [[]], [[]] -> [[]]
+      | (row1::rest1), (row2::rest2) -> ( add_two_intseqs row1 row2 ) :: ( add_two_intseq_lists rest1 rest2 ) ;;
+
+
 (* matrix addition *)
 let matrixadd x y =
-  failwith "not implemented yet" ;;
+  match x, y with
+  IM [], IM [] -> IM []
+  | IM [[]], IM [[]] -> IM [[]]
+  | IM integerseq1, IM integerseq2 -> IM ( add_two_intseq_lists integerseq1 integerseq2 ) ;;
 
 
 (* matrix multiplication *)
