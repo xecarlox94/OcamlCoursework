@@ -67,7 +67,7 @@ let matrix_two_rows_three_columns = IM [[2;3;4];[1;2;3]];;
 
 (* test for the correct shape of matrix_two_rows_three_columns *)
 let matrixshape_two_rows_three_columns _test_ctxt =
-  assert_equal (3,2) (matrixshape matrix_two_rows_three_columns);;
+  assert_equal (2,3) (matrixshape matrix_two_rows_three_columns);;
 
 let matrix_one_row_one_column = IM [[1]];;
 
@@ -77,7 +77,7 @@ let matrixshape_one_row_one_column _test_ctxt =
 
 (* test for the correct shape of matrix_one_row_zero_columns *)
 let matrixshape_one_row_zero_columns _test_ctxt =
-  assert_equal (0,1) (matrixshape matrix_one_row_zero_columns);;
+  assert_equal (1,0) (matrixshape matrix_one_row_zero_columns);;
 
 let matrix_four_rows_four_columns = IM [[1;2;3;4];[2;3;4;5];[3;4;5;6];[1;2;3;4]];;
 

@@ -23,7 +23,7 @@ let rec string_of_matrix m =
 let getbody (IM x) = x;;
 
 (* Gets head of a integer list *)
-let get_head: int list -> int =
+let get_head: 'a list -> 'a =
   fun xlist ->
     match xlist with
       (x::rest) -> x
@@ -37,24 +37,24 @@ let rec count_row_elements: 'a list -> int =
       [] -> 0
       | (x::rest) -> 1 + count_row_elements rest ;;
 
-let rec count_rows_matrix: intmatrix -> int =
+let rec count_rows_matrix: intseq list -> int =
   fun x ->
     match x with
-      IM [] -> 0
-      | IM [[]] -> 0
-      | IM (row::rest) -> 1 + count_rows_matrix ( IM rest ) ;;
+      [] -> 0
+      | [[]] -> 0
+      | (row::rest) -> 1 + count_rows_matrix rest ;;
 
 (* returns an list with the length of each row list *)
-let rec rows_length_list: intmatrix -> int list =
+let rec rows_length_list: intseq list -> intseq =
   fun x ->
     match x with
-      IM [] -> []
-      | IM [[]] -> []
-      | IM (row::rest) -> (count_row_elements row) :: rows_length_list (IM rest) ;;
+      [] -> []
+      | [[]] -> []
+      | (row::rest) -> (count_row_elements row) :: rows_length_list rest ;;
 
 
 (* checks if all list elements are equal to l and equal among eachother *)
-let rec all_list_elem_same: int -> int list -> bool =
+let rec all_list_elem_same: int -> intseq -> bool =
   fun l xs ->
     match xs with
       [] -> true
@@ -63,7 +63,7 @@ let rec all_list_elem_same: int -> int list -> bool =
     
 
 (* checks if matrix rows have all the same length *)
-let all_matrix_rows_same: intmatrix -> bool =
+let all_matrix_rows_same: intseq list -> bool =
   fun x ->
     all_list_elem_same (get_head (rows_length_list x)) (rows_length_list x) ;;
 
@@ -74,14 +74,14 @@ let ismatrix x =
   match x with
     (IM []) -> true
     | (IM [[]]) -> true
-    | x -> all_matrix_rows_same x ;;
+    | (IM intseqs) -> all_matrix_rows_same intseqs ;;
 
 (* function matrixshape takes the matrix, and calculates the number of columns and rows *)
 let matrixshape x =
   match x with
     (IM []) -> (0,0)
-    | (IM [[]]) -> (0, 0)
-    | x -> ( (get_head (rows_length_list x)) , (count_rows_matrix x) ) ;;
+    | (IM [[]]) -> (1, 0)
+    | ( IM intseqs )-> ( (count_rows_matrix intseqs), (get_head (rows_length_list intseqs)) ) ;;
 
 (* adding two intseqs, integer by integer, and returns a intseq sum of each element *)
 let rec add_two_intseqs: intseq -> intseq -> intseq =
@@ -122,21 +122,24 @@ let rec build_new_row: int -> intseq list -> intseq =
       [] -> []
       | (row::rest) -> ( take_elem_pos elem row ) :: build_new_row elem rest ;;
 
-(* transpose a intseq list *)
+(* transpose a intseq list 
 let transpose_intseq_list: intseq list -> intseq list =
   fun intseqs ->
+    let length_rows = count_row_elements ( get_head intseqs )
     let rec transpose: int -> intseq list -> intseq list =
       fun counter intseqlist ->
         match intseqlist with
           [row] -> [build_new_row counter [row] ]
           | (row::rest) -> ( build_new_row counter [row] ) :: ( transpose (counter + 1) rest )
     in
-    transpose 0 intseqs ;;
+    transpose length_rows intseqs ;;*)
 
 
 (* multiply two intseq lists and returns a single intseq list *)
 let mul_intseqs: intseq list -> intseq list -> intseq list =
   fun intseq1 intseq2 -> intseq1 ;;
+
+let matrixmult x y = x ;;
 
 (* matrix multiplication 
 let matrixmult x y = 
