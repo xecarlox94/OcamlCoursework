@@ -15,6 +15,9 @@ let mul_int_utest _text_ctxt =
 let div_float_utest _text_ctxt =
   assert_equal 3.0 (div_float 12.0 4.0) ;;
 
+(* *)
+let count_string_list_utest _text_ctxt =
+  assert_equal 3 (count ["asdf"; "sdfsdf"; "sdfasdf"]) ;;
 
 
 (* list of unit tests *)
@@ -22,9 +25,31 @@ let unit_tests =
   [ "add_test1">::add_test1
   ; "mul_int_utest">::mul_int_utest
   ; "div_float_utest">::div_float_utest
+  ; "count_string_list_utest">::count_string_list_utest
   ];;
 
 (* property based tests *)
+
+(* integer sequences of random natural numbers with length 5 *)
+let int_list_5_gen =
+  QCheck.Gen.(list_size (return 5) nat) ;;
+
+(* float sequences of natural numbers with length 15 *)
+let float_list_7_gen =
+  QCheck.Gen.(list_size (return 7) float) ;;
+
+
+(* counts integer sequences *)
+let count_int_list =
+  QCheck.Test.make ~name:"count_int_list" ~count:100
+    QCheck.(make int_list_5_gen)
+    ( fun list -> count list = 5 )
+
+(* counts integer sequences *)
+let count_float_list =
+  QCheck.Test.make ~name:"count_float_list" ~count:100
+    QCheck.(make float_list_7_gen)
+    ( fun list -> count list = 7 )
 
 (* checks if 0.0 is divided by a random number should return 0 *)
 let div_float_ptest =
@@ -51,6 +76,8 @@ let property_tests =
     [ add_zero
     ; mul_int_ptest
     ; div_float_ptest
+    ; count_int_list
+    ; count_float_list
     ];;
 
 (* run the unit and property based tests *)
