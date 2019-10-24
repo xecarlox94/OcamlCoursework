@@ -7,9 +7,13 @@ open OUnit2;;
 let add_test1 _test_ctxt =
   assert_equal 9 (add 5 4) ;;
 
-(* it tests if 3 times 2 is equal to 6 *)
+(* it tests the mult_int, 3 times 2 is equal to 6 *)
 let mul_int_utest _text_ctxt =
   assert_equal 6 (mul_int 3 2) ;;
+
+(* it tests the div_float, 12.0 divided by 4.0  *)
+let div_float_utest _text_ctxt =
+  assert_equal 3.0 (div_float 12.0 4.0) ;;
 
 (* list of unit tests *)
 let unit_tests =
@@ -19,7 +23,13 @@ let unit_tests =
 
 (* property based tests *)
 
-(* check if a random number is multiplied by zero *)
+(* checks if 0.0 is divided by a random number should return 0 *)
+let div_float_ptest =
+  QCheck.Test.make ~name:"div_float" ~count: 1000
+    QCheck.(make Gen.float)
+      (fun x -> div_float 0.0 x = 0.0 ) ;;
+
+(* check if a random number is multiplied by zero  should return 0*)
 let mul_int_ptest =
   QCheck.Test.make ~name:"mul_int" ~count:1000
     QCheck.(make Gen.nat )
