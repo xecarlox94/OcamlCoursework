@@ -51,15 +51,20 @@ let int_list_5_gen =
 let float_list_7_gen =
   QCheck.Gen.(list_size (return 7) float) ;;
 
+(* gets head equal to zero from a zero integer list *)
+let get_head_ptest =
+  QCheck.Test.make ~make: "get_head_int_list" ~count: 100
+    QCheck.(make float_list_7_gen)
+    (fun list -> get_head list = 0 )
 
 (* counts integer sequences *)
-let count_int_list =
+let count_int_list_ptest =
   QCheck.Test.make ~name:"count_int_list" ~count:100
     QCheck.(make int_list_5_gen)
     ( fun list -> count list = 5 )
 
 (* counts integer sequences *)
-let count_float_list =
+let count_float_list_ptest =
   QCheck.Test.make ~name:"count_float_list" ~count:100
     QCheck.(make float_list_7_gen)
     ( fun list -> count list = 7 )
@@ -89,8 +94,9 @@ let property_tests =
     [ add_zero
     ; mul_int_ptest
     ; div_float_ptest
-    ; count_int_list
-    ; count_float_list
+    ; count_int_list_ptest
+    ; count_float_list_ptest
+    ; get_head_ptest
     ];;
 
 (* run the unit and property based tests *)
