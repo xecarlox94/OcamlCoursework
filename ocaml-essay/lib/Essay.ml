@@ -157,7 +157,8 @@ get_tuples_integer tuple1 ;;
     The next functions is a normal named functions. The second one is also a named function but resultant from a partially applied named function.
 *)
 
-let mul_int: int -> int -> int = fun x y -> x * y ;;
+
+(* using the previous mul_int function *)
 
 mul_int 5 6 ;;
 

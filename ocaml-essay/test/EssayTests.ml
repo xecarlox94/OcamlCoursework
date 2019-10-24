@@ -15,10 +15,20 @@ let mul_int_utest _text_ctxt =
 let div_float_utest _text_ctxt =
   assert_equal 3.0 (div_float 12.0 4.0) ;;
 
-(* *)
+(* tests if string list counts the elements*)
 let count_string_list_utest _text_ctxt =
   assert_equal 3 (count ["asdf"; "sdfsdf"; "sdfasdf"]) ;;
 
+(* tests if it returns true *)
+let is_good_weather_utest _text_ctxt =
+  assert_equal true (is_good_weather "sunny") ;;
+
+(* tests if it returns true *)
+let is_good_weather_utest2 _text_ctxt =
+  assert_equal false (is_good_weather "sdggerg") ;;
+
+let get_head_utest _text_ctxt =
+  assert_equal 4 (get_head [4;6;1]) ;;
 
 (* list of unit tests *)
 let unit_tests =
@@ -26,6 +36,9 @@ let unit_tests =
   ; "mul_int_utest">::mul_int_utest
   ; "div_float_utest">::div_float_utest
   ; "count_string_list_utest">::count_string_list_utest
+  ; "is_good_weather_utest">::is_good_weather_utest
+  ; "is_good_weather_utest2">::is_good_weather_utest2
+  ; "get_head_utest">::get_head_utest
   ];;
 
 (* property based tests *)
