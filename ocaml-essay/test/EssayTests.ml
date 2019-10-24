@@ -41,11 +41,18 @@ let get_tuples_integer_utest _text_ctxt =
 
 (* tests if the mult_int_100 returns the correct value *)
 let mul_int_100_utest _text_ctxt =
-  assert_equal 300 (mul_int_100 3) ;;
+  assert_equal 300 (mul_int_by_100 3) ;;
 
+(* tests if map changes all the values *)
 let map_utest _text_ctxt =
   assert_equal [3;7;5] (
-    map ( fun x -> x / 2 ) [6;14;5]
+    map [6;14;10] ( fun x -> x / 2 )
+  ) ;;
+
+(* tests if filter changes all the values *)
+let filter_utest _text_ctxt =
+  assert_equal [3;5;9] (
+    filter [3;4;8;0;5;9] ( fun x -> x mod 2 <> 0)
   ) ;;
 
 (* list of unit tests *)
@@ -61,6 +68,7 @@ let unit_tests =
   ; "get_tuples_integer_utest">::get_tuples_integer_utest
   ; "mul_int_100_utest">::mul_int_100_utest
   ; "map_utest">::map_utest
+  ; "filter_utest">::filter_utest
   ];;
 
 (* property based tests *)
@@ -77,7 +85,15 @@ let zero_int_list_5_gen =
 let float_list_7_gen =
   QCheck.Gen.(list_size (return 7) float) ;;
 
-let map_poly_list_ptest = 
+let filter_ptest =
+  QCheck.Test.make ~name:"filter_test" ~count:100
+    QCheck.(make zero_int_list_5_gen)
+    ( fun list ->
+      filter list (fun x -> x = 0) = [0;0;0;0;0]
+    ) ;;
+
+(* tests if map affects all elements of a list *)
+let map_list_ptest = 
   QCheck.Test.make ~name:"map_test" ~count:100
     QCheck.(make int_list_5_gen)
     (fun list ->
@@ -123,7 +139,8 @@ let property_tests =
     ; div_float_ptest
     ; count_int_list_ptest
     ; count_float_list_ptest
-    ; map_poly_list_ptest
+    ; map_list_ptest
+    ; filter_ptest
     ];;
 
 (* run the unit and property based tests *)
