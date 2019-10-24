@@ -15,10 +15,13 @@ let mul_int_utest _text_ctxt =
 let div_float_utest _text_ctxt =
   assert_equal 3.0 (div_float 12.0 4.0) ;;
 
+
+
 (* list of unit tests *)
 let unit_tests =
   [ "add_test1">::add_test1
   ; "mul_int_utest">::mul_int_utest
+  ; "div_float_utest">::div_float_utest
   ];;
 
 (* property based tests *)
@@ -47,6 +50,7 @@ let property_tests =
   List.map QCheck_ounit.to_ounit2_test
     [ add_zero
     ; mul_int_ptest
+    ; div_float_ptest
     ];;
 
 (* run the unit and property based tests *)
