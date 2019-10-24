@@ -27,8 +27,26 @@ let is_good_weather_utest _text_ctxt =
 let is_good_weather_utest2 _text_ctxt =
   assert_equal false (is_good_weather "sdggerg") ;;
 
+(* tests if the function returns the head of a integer list *)
 let get_head_utest _text_ctxt =
   assert_equal 4 (get_head [4;6;1]) ;;
+
+(* tests if the function returns the rest of a function *)
+let get_rest_utest _text_ctxt = 
+  assert_equal [3;4;6] (get_rest [9;3;4;6]) ;;
+
+(* tests if it returns the tuples integer *)
+let get_tuples_integer_utest _text_ctxt =
+  assert_equal 4 (get_tuples_integer ("Ocaml", 4) ) ;;
+
+(* tests if the mult_int_100 returns the correct value *)
+let mul_int_100_utest _text_ctxt =
+  assert_equal 300 (mul_int_100 3) ;;
+
+let map_utest _text_ctxt =
+  assert_equal [3;7;5] (
+    map ( fun x -> x / 2 ) [6;14;5]
+  ) ;;
 
 (* list of unit tests *)
 let unit_tests =
@@ -39,6 +57,10 @@ let unit_tests =
   ; "is_good_weather_utest">::is_good_weather_utest
   ; "is_good_weather_utest2">::is_good_weather_utest2
   ; "get_head_utest">::get_head_utest
+  ; "get_rest_utest">::get_rest_utest
+  ; "get_tuples_integer_utest">::get_tuples_integer_utest
+  ; "mul_int_100_utest">::mul_int_100_utest
+  ; "map_utest">::map_utest
   ];;
 
 (* property based tests *)
@@ -47,27 +69,32 @@ let unit_tests =
 let int_list_5_gen =
   QCheck.Gen.(list_size (return 5) nat) ;;
 
+(* integer sequences of zeros with length 5 *)
+let zero_int_list_5_gen =
+  QCheck.Gen.(list_size (return 5) (return 0)) ;;
+
 (* float sequences of natural numbers with length 15 *)
 let float_list_7_gen =
   QCheck.Gen.(list_size (return 7) float) ;;
 
-(* gets head equal to zero from a zero integer list *)
-let get_head_ptest =
-  QCheck.Test.make ~make: "get_head_int_list" ~count: 100
-    QCheck.(make float_list_7_gen)
-    (fun list -> get_head list = 0 )
+let map_poly_list_ptest = 
+  QCheck.Test.make ~name:"map_test" ~count:100
+    QCheck.(make int_list_5_gen)
+    (fun list ->
+      map list (fun x -> x * 0) = [0;0;0;0;0]
+    )
 
 (* counts integer sequences *)
 let count_int_list_ptest =
   QCheck.Test.make ~name:"count_int_list" ~count:100
     QCheck.(make int_list_5_gen)
-    ( fun list -> count list = 5 )
+    ( fun list -> count list = 5 ) ;;
 
 (* counts integer sequences *)
 let count_float_list_ptest =
   QCheck.Test.make ~name:"count_float_list" ~count:100
     QCheck.(make float_list_7_gen)
-    ( fun list -> count list = 7 )
+    ( fun list -> count list = 7 ) ;;
 
 (* checks if 0.0 is divided by a random number should return 0 *)
 let div_float_ptest =
@@ -96,7 +123,7 @@ let property_tests =
     ; div_float_ptest
     ; count_int_list_ptest
     ; count_float_list_ptest
-    ; get_head_ptest
+    ; map_poly_list_ptest
     ];;
 
 (* run the unit and property based tests *)
