@@ -10,4 +10,4 @@ let rec i2c i f x =
    at 0, this just returns the amount of times f was applied to x,
    thus telling us which Church numeral it was. *)
 let c2i x =
-  i2c x ( fun x -> x + 1 ) 0 ;;
+  x ((+) 1) 0 ;;
