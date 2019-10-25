@@ -156,9 +156,20 @@ let rec mul_intseqs: intseq -> intseq -> int =
       [x1], [x2] -> ( x1 * x2 )
       | (h1::rest1), (h2::rest2) -> ( h1 * h2 ) + (mul_intseqs rest1 rest2) ;;
 
+
+(* it multiplies an intseq by a intseq list and returns a intseq *)
+let rec mult_intseq_by_intseqlist: intseq -> intseq list -> intseq =
+  fun intseq intseqlist ->
+    match intseqlist with
+      [row] -> [mul_intseqs intseq row]
+      | (headrow::rest) -> (mul_intseqs intseq headrow) :: (mult_intseq_by_intseqlist intseq rest) ;;
+
 (* multiply two intseq lists and returns a single intseq list *)
-let mul_intseqlists: intseq list -> intseq list -> intseq list =
-  fun intseq1 intseq2 -> intseq1 ;;
+let rec mul_intseqlists: intseq list -> intseq list -> intseq list =
+  fun intseq1 intseq2 ->
+    match intseq1 with
+      [row] -> [mult_intseq_by_intseqlist row intseq2]
+      | (headrow::rest) -> ( mult_intseq_by_intseqlist headrow intseq2) :: (mul_intseqlists rest intseq2) ;;
 
 
 (* matrix multiplication *)
