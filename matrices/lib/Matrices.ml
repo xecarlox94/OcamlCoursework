@@ -178,6 +178,6 @@ let matrixmult x y =
   match x, y with
     IM [], IM [] -> IM []
     | IM [[]], IM [[]] -> IM [[]]
-    | IM integerseq1, IM integerseq2 -> IM ( mul_intseqlists integerseq1 integerseq2 ) ;;
+    | IM integerseq1, IM integerseq2 -> IM ( mul_intseqlists ( transpose_intseq_list integerseq1 ) integerseq2 ) ;;
 
 
