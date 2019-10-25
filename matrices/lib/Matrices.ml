@@ -76,7 +76,7 @@ let ismatrix x =
     | (IM [[]]) -> true
     | (IM intseqs) -> all_matrix_rows_same intseqs ;;
 
-(* function matrixshape takes the matrix, and calculates the number of columns and rows *)
+(* function matrixshape takes the matrix, and calculates the number of rows and collumns *)
 let matrixshape x =
   match x with
     (IM []) -> (0,0)
@@ -113,7 +113,8 @@ let rec take_elem_pos: int -> intseq -> int =
       (x::rest) ->
         if ( elem = 0)
         then x
-        else take_elem_pos ( elem - 1) rest ;;
+        else take_elem_pos ( elem - 1) rest
+      | _ -> -1 ;;
 
 (* builds an intseq from many different lists, from a specific index *)
 let rec build_new_row: int -> intseq list -> intseq =
@@ -122,30 +123,43 @@ let rec build_new_row: int -> intseq list -> intseq =
       [] -> []
       | (row::rest) -> ( take_elem_pos elem row ) :: build_new_row elem rest ;;
 
-(* transpose a intseq list 
+(* gets the length of a intseq  *)
+let intseqlist_collumnlength: intseq list -> int =
+  fun intseq_list ->
+    let shape: (int * int) = matrixshape (IM intseq_list) 
+    in
+    match shape with
+      ( rowlength, collumnlength ) -> collumnlength ;;
+
+(* transpose a intseq list with a given collumn length *)
+let transpose: int -> int -> intseq list -> intseq list =
+  fun length_collumns counter intseqs ->
+    let rec transpose_rec: int -> int -> intseq list -> intseq list =
+      fun length_collumns counter intseqlist ->
+        if ( (length_collumns - 1 )  > counter)
+        then (build_new_row counter intseqlist) :: transpose_rec length_collumns  (counter + 1) intseqlist
+        else [build_new_row counter intseqlist]
+    in
+    transpose_rec length_collumns 0 intseqs ;;
+
+(* transpose a intseq list *)
 let transpose_intseq_list: intseq list -> intseq list =
   fun intseqs ->
-    let length_rows = count_row_elements ( get_head intseqs )
-    let rec transpose: int -> intseq list -> intseq list =
-      fun counter intseqlist ->
-        match intseqlist with
-          [row] -> [build_new_row counter [row] ]
-          | (row::rest) -> ( build_new_row counter [row] ) :: ( transpose (counter + 1) rest )
+    let length_collumns = intseqlist_collumnlength intseqs 
     in
-    transpose length_rows intseqs ;;*)
+    transpose length_collumns 0 intseqs ;;  
 
 
 (* multiply two intseq lists and returns a single intseq list *)
-let mul_intseqs: intseq list -> intseq list -> intseq list =
+let mul_intseqlists: intseq list -> intseq list -> intseq list =
   fun intseq1 intseq2 -> intseq1 ;;
 
-let matrixmult x y = x ;;
 
-(* matrix multiplication 
-let matrixmult x y = 
+(* matrix multiplication *)
+let matrixmult x y =
   match x, y with
     IM [], IM [] -> IM []
     | IM [[]], IM [[]] -> IM [[]]
-    | IM integerseq1, IM integerseq2 -> IM ( mul_intseqs (transpose_intseq_list integerseq1) integerseq2 ) ;;*)
+    | IM integerseq1, IM integerseq2 -> IM ( mul_intseqlists (transpose_intseq_list integerseq1) integerseq2 ) ;;
 
 
