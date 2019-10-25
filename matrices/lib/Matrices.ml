@@ -154,7 +154,8 @@ let rec mul_intseqs: intseq -> intseq -> int =
   fun intseq1 intseq2 ->
     match intseq1, intseq2 with
       [x1], [x2] -> ( x1 * x2 )
-      | (h1::rest1), (h2::rest2) -> ( h1 * h2 ) + (mul_intseqs rest1 rest2) ;;
+      | (h1::rest1), (h2::rest2) -> ( h1 * h2 ) + (mul_intseqs rest1 rest2)
+      | _, _ -> 0;;
 
 
 (* it multiplies an intseq by a intseq list and returns a intseq *)
@@ -177,6 +178,6 @@ let matrixmult x y =
   match x, y with
     IM [], IM [] -> IM []
     | IM [[]], IM [[]] -> IM [[]]
-    | IM integerseq1, IM integerseq2 -> IM ( mul_intseqlists (transpose_intseq_list integerseq1) integerseq2 ) ;;
+    | IM integerseq1, IM integerseq2 -> IM ( mul_intseqlists integerseq1 integerseq2 ) ;;
 
 
