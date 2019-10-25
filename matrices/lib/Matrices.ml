@@ -149,6 +149,12 @@ let transpose_intseq_list: intseq list -> intseq list =
     in
     transpose length_collumns 0 intseqs ;;  
 
+(* it multiplies two inteseqs and returns an integer *)
+let rec mul_intseqs: intseq -> intseq -> int =
+  fun intseq1 intseq2 ->
+    match intseq1, intseq2 with
+      [x1], [x2] -> ( x1 * x2 )
+      | (h1::rest1), (h2::rest2) -> ( h1 * h2 ) + (mul_intseqs rest1 rest2) ;;
 
 (* multiply two intseq lists and returns a single intseq list *)
 let mul_intseqlists: intseq list -> intseq list -> intseq list =
