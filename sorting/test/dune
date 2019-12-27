@@ -1,7 +1,0 @@
-(test
-  (name SortingTests)
-  (libraries Sorting oUnit qcheck))
-
-(env
-  (dev
-    (flags (:standard -warn-error -A))))
